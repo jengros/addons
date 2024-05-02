@@ -1040,8 +1040,8 @@ class Kocom(rs485):
                     if mode == 'heat':
                         p_value += '1100'
                     elif mode == 'off':
-                        # p_value += '0001'
-                        p_value += '0100'
+                        # 0100 -> 0000
+                        p_value += '0000'
                     else:
                         p_value += '1101'
                     p_value += '{0:02x}'.format(int(float(target_temp)))
@@ -1085,6 +1085,7 @@ class Kocom(rs485):
         return switch
 
     def parse_thermostat(self, value='0000000000000000', init_temp=False):
+        logger.info('[Recv Packet] ' + value)
         thermo = {}
         heat_mode = 'heat' if value[:2] == '11' else 'off'
         away_mode = 'on' if value[2:4] == '01' else 'off'

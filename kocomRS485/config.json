@@ -41,12 +41,12 @@
       "password": "admin3844"
     },
     "Wallpad": {
-      "light": true,
+      "light": false,
       "plug": false,
       "thermostat": false,
       "fan": false,
       "gas": false,
-      "elevator": true
+      "elevator": false
     },
     "Advanced": {
       "INIT_TEMP": 22,

@@ -8,9 +8,8 @@ COPY run.sh makeconf.sh rs485.py /
 
 # Install requirements for add-on
 RUN apt-get update && apt-get -y install jq
-RUN python3 -m pip install pyserial && \
-        python3 -m pip install paho-mqtt
-
+RUN python3 -m pip install pyserial
+RUN python3 -m pip install paho-mqtt
 RUN python3 -m pip install typing_extensions
 
 WORKDIR /share
@@ -19,4 +18,3 @@ RUN chmod a+x /makeconf.sh
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
-

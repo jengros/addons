@@ -2,6 +2,7 @@
 '''
 python -m pip install pyserial
 python -m pip install paho-mqtt
+python3 -m pip install typing_extensions
 '''
 import os
 import os.path
@@ -623,7 +624,7 @@ class Kocom(rs485):
                 'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'spd_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'spd_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
-                'stat_val_tpl': '{{ value_json.mode }}',
+                'val_tpl': '{{ value_json.mode }}',
                 'spd_val_tpl': '{{ value_json.speed }}',
                 'pl_on': 'on',
                 'pl_off': 'off',
@@ -655,7 +656,7 @@ class Kocom(rs485):
                                 'name': '{}_{}_{}'.format(self._name, room, sub_device),
                                 'cmd_t': '{}/{}/{}_{}/set'.format(HA_PREFIX, HA_LIGHT, room, sub_device),
                                 'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_LIGHT, room),
-                                'val_tpl': '{{ value_json.' + str(sub_device) + ' }}',
+                                'stat_val_tpl': '{{ value_json.' + str(sub_device) + ' }}',
                                 'pl_on': 'on',
                                 'pl_off': 'off',
                                 'uniq_id': '{}_{}_{}'.format(self._name, room, sub_device),
@@ -1040,7 +1041,7 @@ class Kocom(rs485):
                     if mode == 'heat':
                         p_value += '1100'
                     elif mode == 'off':
-                        # 0100 -> 0000
+                        # p_value += '0000'
                         p_value += '0000'
                     else:
                         p_value += '1101'
@@ -1085,7 +1086,6 @@ class Kocom(rs485):
         return switch
 
     def parse_thermostat(self, value='0000000000000000', init_temp=False):
-        logger.info('[Recv Packet] ' + value)
         thermo = {}
         heat_mode = 'heat' if value[:2] == '11' else 'off'
         away_mode = 'on' if value[2:4] == '01' else 'off'
@@ -1120,7 +1120,7 @@ class Grex:
         _t5.start()
 
     def connect_mqtt(self, server, name):
-        mqtt_client = mqtt.Client()
+        mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
         mqtt_client.on_message = self.on_message
         #mqtt_client.on_publish = self.on_publish
         mqtt_client.on_subscribe = self.on_subscribe

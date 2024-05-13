@@ -622,13 +622,13 @@ class Kocom(rs485):
                 'name': '{}_{}_{}'.format(self._name, 'wallpad', DEVICE_FAN),
                 'cmd_t': '{}/{}/{}/mode'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
-                'spd_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
-                'spd_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
-                'val_tpl': '{{ value_json.mode }}',
-                'spd_val_tpl': '{{ value_json.speed }}',
+               'pr_mode_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
+                'pr_mode_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
+                'stat_val_tpl': '{{ value_json.mode }}',
+                'pr_mode_val_tpl': '{{ value_json.speed }}',
                 'pl_on': 'on',
                 'pl_off': 'off',
-                'spds': ['low', 'medium', 'high', 'off'],
+                'pr_modes': ['low', 'medium', 'high'],
                 'uniq_id': '{}_{}_{}'.format(self._name, 'wallpad', DEVICE_FAN),
                 'device': {
                     'name': 'Kocom {}'.format('wallpad'),
@@ -1189,22 +1189,22 @@ class Grex:
             'name': '{}_{}'.format(self._name, DEVICE_FAN),
             'cmd_t': '{}/{}/{}/mode'.format(HA_PREFIX, HA_FAN, 'grex'),
             'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'grex'),
-            'spd_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'grex'),
-            'spd_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'grex'),
-            'stat_val_tpl': '{{ value_json.mode }}',
-            'spd_val_tpl': '{{ value_json.speed }}',
-            'pl_on': 'on',
-            'pl_off': 'off',
-            'spds': ['low', 'medium', 'high', 'off'],
-            'uniq_id': '{}_{}_{}'.format(self._name, 'grex', DEVICE_FAN),
-            'device': {
-                'name': 'Grex Ventilator',
-                'ids': 'grex_ventilator',
-                'mf': 'Grex',
-                'mdl': 'Ventilator',
-                'sw': SW_VERSION
+               'pr_mode_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
+                'pr_mode_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
+                'stat_val_tpl': '{{ value_json.mode }}',
+                'pr_mode_val_tpl': '{{ value_json.speed }}',
+                'pl_on': 'on',
+                'pl_off': 'off',
+                'pr_modes': ['low', 'medium', 'high'],
+                'uniq_id': '{}_{}_{}'.format(self._name, 'wallpad', DEVICE_FAN),
+                'device': {
+                    'name': 'Kocom {}'.format('wallpad'),
+                    'ids': 'kocom_{}'.format('wallpad'),
+                    'mf': 'KOCOM',
+                    'mdl': 'Wallpad',
+                    'sw': SW_VERSION
+                }
             }
-        }
         subscribe_list.append((ha_topic, 0))
         subscribe_list.append((ha_payload['cmd_t'], 0))
         subscribe_list.append((ha_payload['spd_cmd_t'], 0))

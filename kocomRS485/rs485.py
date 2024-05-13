@@ -1071,10 +1071,16 @@ class Kocom(rs485):
         return False
 
     def parse_fan(self, value='0000000000000000'):
+        #fan = {}
+        #fan['mode'] = 'on' if value[:2] == '11' else 'off'
+        #fan['speed'] = KOCOM_FAN_SPEED.get(value[4:5], 'off')  # 기본값을 'off'로 설정
+        #return fan
         fan = {}
-        fan['mode'] = 'on' if value[:2] == '11' else 'off'
-        fan['speed'] = KOCOM_FAN_SPEED.get(value[4:5], 'off')  # 기본값을 'off'로 설정
-        return fan
+        # 팬 모드는 value의 5번째와 6번째 문자에 해당 (ex: '11' => on)
+        fan['mode'] = 'on' if value[4:6] == '11' else 'off'
+        # 팬 속도는 value의 9번째 문자에 해당 (ex: '8' => medium)
+        fan['speed'] = KOCOM_FAN_SPEED.get(value[6:7], 'off')
+        return fan        
 
     def parse_switch(self, device, room, value='0000000000000000'):
         switch = {}

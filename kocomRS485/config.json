@@ -41,12 +41,12 @@
       "password": "admin3844"
     },
     "Wallpad": {
-      "light": false,
+      "light": true,
       "plug": false,
-      "thermostat": false,
-      "fan": false,
+      "thermostat": true,
+      "fan": true,
       "gas": false,
-      "elevator": false
+      "elevator": true
     },
     "Advanced": {
       "INIT_TEMP": 22,
@@ -74,7 +74,7 @@
       },
       {
         "name": "kitchen",
-        "number": 2
+        "number": 3
       }
     ],
     "KOCOM_PLUG_SIZE": [

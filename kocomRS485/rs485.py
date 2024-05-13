@@ -643,7 +643,7 @@ class Kocom(rs485):
             #subscribe_list.append((ha_payload['stat_t'], 0))
             
             #subscribe_list.append((ha_payload['spd_cmd_t'], 0))
-            #subscribe_list.append((ha_payload['pr_mode_cmd_t'], 0)) 
+            subscribe_list.append((ha_payload['pr_mode_cmd_t'], 0)) 
             if remove:
                 publish_list.append({ha_topic : ''})
             else:

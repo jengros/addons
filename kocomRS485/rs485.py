@@ -622,7 +622,7 @@ class Kocom(rs485):
                 'name': '{}_{}_{}'.format(self._name, 'wallpad', DEVICE_FAN),
                 'cmd_t': '{}/{}/{}/mode'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
-               'pr_mode_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
+                'pr_mode_cmd_t': '{}/{}/{}/speed'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'pr_mode_stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_FAN, 'wallpad'),
                 'stat_val_tpl': '{{ value_json.mode }}',
                 'pr_mode_val_tpl': '{{ value_json.speed }}',

@@ -1056,7 +1056,8 @@ class Kocom(rs485):
                     mode = self.wp_list[device][room]['mode']['set']
                     speed = self.wp_list[device][room]['speed']['set']
                     if mode == 'on':
-                        p_value += '1100'
+                      //#  p_value += '1100'
+                        p_value += '1102'
                     elif mode == 'off':
                         p_value += '0001'
                     p_value += KOCOM_FAN_SPEED_REV.get(speed)

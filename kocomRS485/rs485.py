@@ -31,7 +31,7 @@ CONF_LOGLEVEL = 'info' # debug, info, warn
 # 보일러 초기값
 INIT_TEMP = 22
 # 환풍기 초기속도 ['low', 'medium', 'high']
-DEFAULT_SPEED = 'medium'
+DEFAULT_SPEED = 'low'
 # 조명 / 플러그 갯수
 KOCOM_LIGHT_SIZE            = {'livingroom': 1, 'bedroom': 1, 'room1': 1, 'room2': 1, 'kitchen': 3}
 KOCOM_PLUG_SIZE             = {'livingroom': 2, 'bedroom': 2, 'room1': 2, 'room2': 2, 'kitchen': 2}

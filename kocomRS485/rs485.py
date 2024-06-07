@@ -127,11 +127,9 @@ KOCOM_INTERVAL = 100
 VENTILATOR_INTERVAL = 150
 
 # GREX 그렉스 전열교환기 패킷 기본정보
-#GREX_MODE                   = {'0100': 'auto', '0200': 'manual', '0300': 'sleep', '0000': 'off'}
-#GREX_SPEED                  = {'0101': 'low', '0202': 'medium', '0303': 'high', '0000': 'off'}
-
-GREX_MODE                   = {'0200': 'auto', '0100': 'manual', '0300': 'sleep', '0000': 'off'}
-GREX_SPEED                  = {'0202': 'low', '0101': 'medium', '0303': 'high', '0000': 'off'}
+GREX_MODE                   = {'0100': 'auto', '0200': 'manual', '0300': 'sleep', '0000': 'off'}
+GREX_SPEED                  = {'0101': 'low', '0202': 'medium', '0303': 'high', '0000': 'off'}
+ 
 # CONFIG 파일 변수값
 CONF_FILE = 'rs485.conf'
 CONF_LOGFILE = 'rs485.log'

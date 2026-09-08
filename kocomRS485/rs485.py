@@ -390,6 +390,12 @@ class Kocom(rs485):
         return mqtt_client
 
     def on_message(self, client, obj, msg):
+        # HA may restart while this bridge remains connected to MQTT.
+        if msg.topic == HA_PREFIX + '/status':
+            if msg.payload == b'online':
+                self.homeassistant_device_discovery()
+            return
+
         _topic = msg.topic.split('/')
         _payload = msg.payload.decode()
 
@@ -540,6 +546,7 @@ class Kocom(rs485):
     def homeassistant_device_discovery(self, initial=False, remove=False):
         subscribe_list = []
         subscribe_list.append(('rs485/bridge/#', 0))
+        subscribe_list.append((HA_PREFIX + '/status', 0))
         publish_list = []
         
         self.ha_registry = False
@@ -748,7 +755,7 @@ class Kocom(rs485):
             self.d_mqtt.subscribe(subscribe_list)
         for ha in publish_list:
             for topic, payload in ha.items():
-                self.d_mqtt.publish(topic, payload)
+                self.d_mqtt.publish(topic, payload, retain=True)
         self.ha_registry = ha_topic
 
     def send_to_homeassistant(self, device, room, value):

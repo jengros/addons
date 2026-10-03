@@ -397,6 +397,12 @@ class Kocom(rs485):
             return
 
         _topic = msg.topic.split('/')
+        # Discovery echoes acknowledge registration; they are not device commands.
+        if len(_topic) == 4 and _topic[0] == HA_PREFIX and _topic[3] == 'config':
+            if self.ha_registry != False and self.ha_registry == msg.topic and self.kocom_scan:
+                self.kocom_scan = False
+            return
+
         _payload = msg.payload.decode()
 
         if 'config' in _topic and _topic[0] == 'rs485' and _topic[1] == 'bridge' and _topic[2] == 'config':
@@ -438,9 +444,6 @@ class Kocom(rs485):
             return
         logger.info("Message: {} = {}".format(msg.topic, _payload))
         
-        if self.ha_registry != False and self.ha_registry == msg.topic and self.kocom_scan:
-            self.kocom_scan = False
-
     def parse_message(self, topic, payload):
         device = topic[1]
         command = topic[3]
